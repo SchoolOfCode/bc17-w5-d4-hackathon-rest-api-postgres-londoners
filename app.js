@@ -7,7 +7,7 @@ import express from "express";
 import {
   getArtists,
   getArtistById,
-  // createArtist,
+  createArtist,
   // updateArtistById,
   // deleteArtistById,
 } from "./artists.js";
@@ -58,6 +58,9 @@ app.get("/artists/:id", async function (req, res) {
 
 // Endpoint to create a new <resource_one>
 app.post("/artists/", async function (req, res) {
+  const data = req.body;
+  const artist = await createArtist(data);
+  res.status(201).json({ status: "success", data: artist });
 });
 
 // Endpoint to update a specific <resource_one> by id
