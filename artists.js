@@ -17,6 +17,14 @@ export async function getArtists() {
 
 export async function getArtistById(id) {
   // Query the database and return the resource with a matching id or null
+  try {
+    const queryText = `SELECT * FROM artists WHERE id = $1`
+    const result = await pool.query(queryText, [id]);
+    console.log("Data load successful!");
+      return result.rows;
+    } catch(error) {
+      console.error("Database load failed!", error);
+    }
 }
 
 export async function createArtist(artist) {

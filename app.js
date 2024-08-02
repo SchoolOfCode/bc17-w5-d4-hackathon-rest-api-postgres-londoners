@@ -6,7 +6,7 @@ import express from "express";
 //Import your helper functions for your first resource here
 import {
   getArtists,
-  // getArtistById,
+  getArtistById,
   // createArtist,
   // updateArtistById,
   // deleteArtistById,
@@ -44,6 +44,15 @@ app.get("/artists/", async function (req, res) {
 
 // Endpoint to retrieve a <resource_one> by id
 app.get("/artists/:id", async function (req, res) {
+  const id = req.params.id;
+  const artist = await getArtistById(id);
+  // Assume 404 status if the author is not found
+  if (!artist) {
+    return res
+      .status(404)
+      .json({ status: "fail", data: { msg: "Artist not found" } });
+  }
+  res.status(200).json({ status: "success", data: artist });
   
 });
 
