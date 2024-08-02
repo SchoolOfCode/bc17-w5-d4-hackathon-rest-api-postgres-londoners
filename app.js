@@ -3,14 +3,14 @@ import express from "express";
 
 
 
-// Import your helper functions for your first resource here
-// import {
-//   getResourceOne,
-//   getResourceOneById,
-//   createResourceOne,
-//   updateResourceOneById,
-//   deleteResourceOneById,
-// } from "./resource_one.js";
+//Import your helper functions for your first resource here
+import {
+  getArtists,
+  // getArtistById,
+  // createArtist,
+  // updateArtistById,
+  // deleteArtistById,
+} from "./artists.js";
 
 
 // Import your helper functions for your second resource here
@@ -37,25 +37,26 @@ app.use(express.json()); // express.json() middleware is used to parse incoming 
 // Resource One Route Handlers
 
 // Endpoint to retrieve all <resource_one>
-app.get("/resourceone/", async function (req, res) {
-    console.log("I'm alive");
-    res.status(200).send("I'm alive!");
+app.get("/artists/", async function (req, res) {
+    const artists = await getArtists();
+  res.status(200).json({ status: "success", data: artists });
 });
 
 // Endpoint to retrieve a <resource_one> by id
-app.get("/resourceone/:id", async function (req, res) {
+app.get("/artists/:id", async function (req, res) {
+  
 });
 
 // Endpoint to create a new <resource_one>
-app.post("/resourceone/", async function (req, res) {
+app.post("/artists/", async function (req, res) {
 });
 
 // Endpoint to update a specific <resource_one> by id
-app.patch("/resourceone/:id", async function (req, res) {
+app.patch("/artists/:id", async function (req, res) {
 });
 
 // Endpoint to delete a specific <resource_one> by id
-app.delete("/resourceone/:id", async function (req, res) {
+app.delete("/artists/:id", async function (req, res) {
 });
 
 
