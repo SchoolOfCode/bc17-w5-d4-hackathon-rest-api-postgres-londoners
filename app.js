@@ -13,14 +13,14 @@ import {
 } from "./artists.js";
 
 
-// Import your helper functions for your second resource here
-// import {
-//   getResourceTwo,
-//   getResourceTwoById,
-//   createResourceTwo,
-//   updateResourceTwoById,
-//   deleteResourceTwoById,
-// } from "./resource_two.js";
+//Import your helper functions for your second resource here
+import {
+  getAlbums,
+  // getAlbumById,
+  // createAlbum,
+  // updateAlbumById,
+  // deleteAlbumById,
+} from "./albums.js";
 
 
 
@@ -60,7 +60,8 @@ app.get("/artists/:id", async function (req, res) {
 app.post("/artists/", async function (req, res) {
   const data = req.body;
   const artist = await createArtist(data);
-  console.log(artist);
+  const artistS = await getArtists();
+  console.log(artistS);
   res.status(201).json({ status: "success", data: artist });
 });
 
@@ -78,25 +79,25 @@ app.delete("/artists/:id", async function (req, res) {
 // Resource Two Route Handlers
 
 // Endpoint to retrieve all <resource_twos>
-app.get("/resourcetwo/", async function (req, res) {
-    const authors = await getAuthors();
-    res.status(200).json({ status: "success", data: authors });
+app.get("/albums/", async function (req, res) {
+    const albums = await getAlbums();
+    res.status(200).json({ status: "success", data: albums });
   });
   
   // Endpoint to retrieve a <resource_twos> by id
-  app.get("/resourcetwo/:id", async function (req, res) {
+  app.get("/albums/:id", async function (req, res) {
   });
   
   // Endpoint to create a new <resource_twos>
-  app.post("/resourcetwo/", async function (req, res) {
+  app.post("/albums/", async function (req, res) {
   });
   
   // Endpoint to update a specific <resource_twos> by id
-  app.patch("/resourcetwo/:id", async function (req, res) {
+  app.patch("/albums/:id", async function (req, res) {
   });
   
   // Endpoint to delete a specific <resource_twos> by id
-  app.delete("/resourcetwo/:id", async function (req, res) {
+  app.delete("/albums/:id", async function (req, res) {
   });
 
 
