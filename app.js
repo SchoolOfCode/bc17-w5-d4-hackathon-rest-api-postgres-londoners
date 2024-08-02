@@ -60,6 +60,7 @@ app.get("/artists/:id", async function (req, res) {
 app.post("/artists/", async function (req, res) {
   const data = req.body;
   const artist = await createArtist(data);
+  console.log(artist);
   res.status(201).json({ status: "success", data: artist });
 });
 

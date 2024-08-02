@@ -27,12 +27,12 @@ export async function getArtistById(id) {
     }
 }
 
-export async function createArtist(artist) {
+export async function createArtist($1) {
   // Query the database to create an resource and return the newly created resource
   try {
     const queryText = `INSERT INTO artists (name) VALUES ($1)`
     const result = await pool.query(queryText, [$1]);
-    console.log("Data load successful!");
+    console.log("Data load successful!", result);
       return result.rows;
     } catch(error) {
       console.error("Database load failed!", error);
