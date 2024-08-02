@@ -27,17 +27,48 @@ export async function getArtistById(id) {
     }
 }
 
-export async function createArtist($1) {
-  // Query the database to create an resource and return the newly created resource
+// export async function createArtist(data) {
+//   // Query the database to create an resource and return the newly created resource
+//   const {name} = data;
+//   try {
+//     const queryText = `INSERT INTO artists (name) VALUES ($1)`;
+//     const result = await pool.query(queryText, [name]);
+//     console.log("Data load successful!", result);
+//       return result.rows;
+//     } catch(error) {
+//       console.error("Database load failed!", error);
+//     }
+// }
+
+// CHAT GPT ONE:
+export async function createArtist(data) {
+  const { name } = data;
+
   try {
-    const queryText = `INSERT INTO artists (name) VALUES ($1)`
-    const result = await pool.query(queryText, [$1]);
-    console.log("Data load successful!", result);
-      return result.rows;
-    } catch(error) {
-      console.error("Database load failed!", error);
+    const queryText = `INSERT INTO artists (name) VALUES ($1) RETURNING *`;
+    const result = await pool.query(queryText, [name]);
+
+    if (result.rows.length > 0) {
+      console.log("Data load successful!", result.rows[0]);
+      return result.rows[0]; // Return the first row from the result
+    } else {
+      console.log("No rows returned.");
+      return {}; // Return an empty object if no rows are returned
     }
+  } catch (error) {
+    console.error("Database load failed!", error);
+    throw error; // Re-throw error for handling in the route
+  }
 }
+
+
+
+
+
+
+
+
+
 
 export async function updateArtistById(id, updates) {
   // Query the database to update the resource and return the newly updated resource or null
